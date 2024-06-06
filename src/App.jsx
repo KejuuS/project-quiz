@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import StartButton from './components/StartButton';
 import InfoBox from './components/InfoBox';
 import QuizBox from './components/QuizBox';
@@ -72,33 +71,35 @@ const App = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold">CompQuiz</h1>
-      {!quizStarted && <StartButton onStart={handleStartQuiz} />}
-      {quizStarted && showInfoBox && (
-        <InfoBox onContinue={handleContinue} onExit={handleExit} />
-      )}
-      {quizStarted && !showInfoBox && !showResultBox && (
-        <QuizBox
-          question={questions[currentQuestion].question}
-          options={questions[currentQuestion].options}
-          answer={questions[currentQuestion].answer}
-          timer={15}
-          currentQuestionNumber={currentQuestion + 1}
-          totalQuestions={questions.length}
-          onOptionSelect={handleOptionSelect}
-          onNext={handleNextQuestion}
-          isLastQuestion={currentQuestion === questions.length - 1}
-        />
-      )}
-      {showResultBox && (
-        <ResultBox
-          score={score}
-          totalQuestions={questions.length}
-          onRestart={handleRestartQuiz}
-          onQuit={handleQuitQuiz}
-        />
-      )}
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="text-center w-full max-w-4xl p-8">
+        <h1 className="text-3xl font-bold mb-4">CompQuiz</h1>
+        {!quizStarted && <StartButton onStart={handleStartQuiz} />}
+        {quizStarted && showInfoBox && (
+          <InfoBox onContinue={handleContinue} onExit={handleExit} />
+        )}
+        {quizStarted && !showInfoBox && !showResultBox && (
+          <QuizBox
+            question={questions[currentQuestion].question}
+            options={questions[currentQuestion].options}
+            answer={questions[currentQuestion].answer}
+            timer={15}
+            currentQuestionNumber={currentQuestion + 1}
+            totalQuestions={questions.length}
+            onOptionSelect={handleOptionSelect}
+            onNext={handleNextQuestion}
+            isLastQuestion={currentQuestion === questions.length - 1}
+          />
+        )}
+        {showResultBox && (
+          <ResultBox
+            score={score}
+            totalQuestions={questions.length}
+            onRestart={handleRestartQuiz}
+            onQuit={handleQuitQuiz}
+          />
+        )}
+      </div>
     </div>
   );
 };
